@@ -477,6 +477,7 @@ static int listfile(cmd_rec *cmd, pool *p, const char *resp_code,
   pr_fs_clear_cache2(name);
   if (pr_fsio_lstat(name, &st) == 0) {
     char *display_name = NULL;
+    unsigned char *emulate_windows = NULL;
 
     suffix[0] = suffix[1] = '\0';
 
@@ -633,7 +634,6 @@ static int listfile(cmd_rec *cmd, pool *p, const char *resp_code,
       t = pr_localtime(p, (time_t *) &sort_time);
     }
 
-    unsigned char *emulate_windows = NULL;
     emulate_windows = get_param_ptr(TOPLEVEL_CONF, "EmulateWindows", FALSE);
     if (emulate_windows != NULL && *emulate_windows == TRUE) {
       char time_str[18], dir_str[13];
